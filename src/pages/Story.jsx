@@ -10,10 +10,28 @@ import "./home.css";
 function Story() {
   const [showContent, setShowContent] = useState(false);
   const [showWriting, setShowWriting] = useState(false);
+  const [showViewing, setShowViewing] = useState(true);
   const [introDone, setIntroDone] = useState(false);
 
-  const viewCardAnim =
+  const buttonAnim =
     introDone && !showWriting
+      ? {
+          // 인트로 끝 & 글쓰기 OFF → 등장
+          y: 0,
+          opacity: 1,
+          display: "flex",
+          visibility: "visible",
+        }
+      : {
+          // 그 외 → 완전 숨김
+          y: -60,
+          opacity: 0,
+          display: "none", // 핵심! DOM 자체를 빼 둔다
+          visibility: "hidden",
+        };
+
+  const viewCardAnim =
+    introDone && !showWriting && showViewing
       ? { y: 0, visibility: "visible" }
       : { y: "100vh", visibility: "hidden" };
   const PANEL_H = "66vh";
@@ -23,6 +41,14 @@ function Story() {
     introDone && showWriting
       ? { y: 0, visibility: "visible" }
       : { y: "-100vh", visibility: "hidden" };
+
+  const headerAnim = introDone
+    ? { y: 0, visibility: "visible" }
+    : { y: "-100vh", visibility: "hidden" };
+
+  const pencilAnim = introDone
+    ? { y: 0, visibility: "visible" }
+    : { y: "100vh", visibility: "hidden" };
 
   const INTRO_DURATION = 1500;
 
@@ -106,8 +132,20 @@ function Story() {
           backdropFilter: "blur(15px)",
         }}
       >
-        <Header />
-
+        <motion.div
+          initial={{ y: 60, visibility: "hidden" }}
+          animate={headerAnim}
+          transition={{ duration: 0.8 }}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            margin: "0 auto",
+          }}
+        >
+          <Header introDone={introDone} />
+        </motion.div>
         <div
           className="p-8"
           style={{
@@ -144,7 +182,10 @@ function Story() {
               margin: "0 auto",
             }}
           >
-            <WritingStory setShowWriting={setShowWriting} />
+            <WritingStory
+              setShowWriting={setShowWriting}
+              introDone={introDone} // <-︎ 추가
+            />
           </motion.div>
           <motion.div
             initial={{ y: "100vh", visibility: "hidden" }}
@@ -158,7 +199,7 @@ function Story() {
               margin: "0 auto",
             }}
           >
-            <ViewStory />
+            <ViewStory setShowViewing={setShowViewing} introDone={introDone} />
           </motion.div>
           {/* <p
             style={{
@@ -173,22 +214,56 @@ function Story() {
         </div>
 
         <motion.div
-          initial={{ scale: 1, opacity: showWriting ? 0 : 1 }}
-          animate={{ scale: 1, opacity: showWriting ? 0 : 1 }}
-          transition={{ default: { duration: 3 }, scale: { duration: 0 } }}
+          initial={{
+            x: "10vw",
+            y: !showViewing || showWriting ? "-80vh" : "-600vh",
+            rotate: !showViewing && showWriting ? 0 : 180,
+          }}
+          animate={{
+            x: "10vw",
+            y: !showViewing || showWriting ? "-600vh" : "-80vh",
+            rotate: showWriting ? 180 : 0,
+          }}
+          transition={{
+            default: { duration: 3 },
+            rotate: { duration: 1, delay: 3.0 },
+          }}
+        >
+          <img src="/public/rocket.svg" />
+        </motion.div>
+        <motion.div
+          initial={{
+            y: -60,
+            opacity: 0,
+            display: "none",
+            visibility: "hidden",
+          }}
+          animate={buttonAnim}
+          transition={{
+            y: { type: "spring", stiffness: 80, damping: 14 },
+            opacity: { duration: 1.1, delay: 0.25 },
+          }}
+          style={{
+            zIndex: 20,
+            position: "absolute",
+            bottom: "40px",
+            left: 0,
+            right: 0,
+            margin: "0 auto",
+            justifyContent: "center",
+          }}
         >
           <div className="bottom-button-container">
             <Button
               type="secondary"
+              disabled={showWriting}
               style={{
                 borderRadius: "3.125rem",
                 background: "rgba(255, 255, 255, 0.30)",
                 width: "50px",
                 height: "50px",
               }}
-              onClick={() => {
-                setShowWriting(!showWriting);
-              }}
+              onClick={() => setShowWriting(!showWriting)}
             >
               <i className="fa-solid fa-pen" />
             </Button>

@@ -5,6 +5,7 @@ export default function Button({
   type = "primary",
   style,
   className = "",
+  disabled = false,
 }) {
   const getBackgroundColor = () => {
     switch (type) {
@@ -32,7 +33,8 @@ export default function Button({
     <button
       onClick={onClick}
       className={`${className} px-4 py-2 rounded cursor-pointer ${getBackgroundColor()}`}
-      style={style}
+      style={{ cursor: disabled ? "auto" : "pointer", ...style }}
+      disabled={disabled}
     >
       {icon && <span className="mr-2">{icon}</span>}
       {children}

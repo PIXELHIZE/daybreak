@@ -1,0 +1,193 @@
+main.dashboard-container {
+  padding: 1rem;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+h1.dashboard-name {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+p.dashboard-greet {
+  font-size: 2rem;
+  line-height: 1.5;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.story-slider-container {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.story-slider-container .slick-slide {
+  padding: 0 0.75rem;
+}
+
+.story-slider-container .slick-dots {
+  bottom: -50px;
+}
+
+.story-slider-container .slick-dots li button:before {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+}
+
+.story-slider-container .slick-dots li.slick-active button:before {
+  color: white;
+}
+
+.story-slider-container .slick-prev,
+.story-slider-container .slick-next {
+  z-index: 10;
+  width: 50px;
+  height: 50px;
+}
+
+.story-slider-container .slick-prev:before,
+.story-slider-container .slick-next:before {
+  font-size: 30px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.story-slider-container .slick-prev:hover:before,
+.story-slider-container .slick-next:hover:before {
+  color: white;
+}
+
+.story-slider-container .slick-prev,
+.story-slider-container .slick-next {
+  z-index: 10;
+  width: 50px;
+  height: 50px;
+}
+
+.story-slider-container .slick-prev {
+  left: -25px;
+}
+
+.story-slider-container .slick-next {
+  right: -25px;
+}
+
+.story-slider-container .slick-prev:before,
+.story-slider-container .slick-next:before {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 24px;
+}
+
+.story-slider-container .slick-prev:hover:before,
+.story-slider-container .slick-next:hover:before {
+  color: white;
+}
+
+.story-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 0.5rem 0;
+}
+
+.story-content {
+  flex: 1;
+}
+
+.story-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #e0e0e0;
+}
+
+.story-footer {
+  margin-top: auto;
+}
+
+.like-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+  width: 100%;
+  white-space: normal;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.like-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.write-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.write-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .story-slider-container {
+    padding: 0 1rem; /* 모바일에서 패딩 줄임 */
+  }
+
+  .story-card {
+    flex: 0 0 calc(100% - 1rem);
+    margin: 0.25rem 0;
+  }
+
+  .story-cards-wrapper {
+    padding: 0 0.5rem;
+  }
+
+  .story-cards-container {
+    gap: 1rem;
+  }
+
+  .slider-btn {
+    display: none;
+  }
+
+  h1.dashboard-name {
+    font-size: 2rem;
+  }
+
+  p.dashboard-greet {
+    font-size: 1.5rem;
+  }
+}

@@ -15,3 +15,4 @@ If you are developing a production application, we recommend using TypeScript wi
 
 - [ ]: 로그인/회원가입 구현
 - [ ]: 글 저장하는 거 / 조회하는 거 레이아웃
+- [ ]: 글을 넘길 때, 로켓 아이콘

@@ -15,6 +15,11 @@ export const randomStory = async () => {
   return res.data;
 };
 
+export const readStory = async (id) => {
+  const res = await api.post(`/stories/${id}/read`);
+  return res.data;
+};
+
 export const myStories = async () => {
   const res = await api.get("/stories/my-stories");
   return res.data;
