@@ -1,0 +1,6 @@
+.bottom-button-container {
+  position: fixed;
+  z-index: 999;
+  bottom: 20px;
+  right: 20px;
+}

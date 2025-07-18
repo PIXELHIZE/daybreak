@@ -1,0 +1,71 @@
+nav {
+  position: relative;
+  width: 100%;
+  height: 100px;
+}
+
+.right-nav {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.31);
+  background: rgba(255, 255, 255, 0.23);
+  box-shadow: inset 0px 4px 4.8px 6px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  height: auto;
+  max-width: 100%;
+}
+
+.left-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 16px;
+  height: 40px;
+  box-sizing: border-box;
+
+  font-size: 14px;
+  white-space: nowrap;
+
+  border-radius: 999px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.bubble {
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  width: 370px;
+  height: 265px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.bubble:after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-width: 0 15px 15px;
+  border-color: #ffffff transparent;
+  display: block;
+  width: 0;
+  z-index: 11;
+  top: -15px;
+  left: calc(50% - 15px);
+}

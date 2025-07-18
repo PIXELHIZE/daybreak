@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+* {
+  font-family: "Inter", sans-serif;
+  word-break: keep-all;
+}
+
+main {
+  background-color: #2b263b;
+  color: #fff;
+  min-height: 100vh;
+}
