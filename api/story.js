@@ -25,6 +25,11 @@ export const myStories = async () => {
   return res.data;
 };
 
+export const hasLiked = async (id) => {
+  const res = await api.get(`/stories/${id}/liked`);
+  return res.data;
+};
+
 export const getStory = async (id) => {
   const res = await api.get(`/stories/${id}`);
   return res.data;

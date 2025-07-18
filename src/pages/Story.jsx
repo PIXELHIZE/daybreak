@@ -10,7 +10,7 @@ import "./home.css";
 function Story() {
   const [showContent, setShowContent] = useState(false);
   const [showWriting, setShowWriting] = useState(false);
-  const [showViewing, setShowViewing] = useState(true);
+  const [showViewing, setShowViewing] = useState(true); // 로켓 발사를 위한
   const [introDone, setIntroDone] = useState(false);
 
   const buttonAnim =
@@ -216,8 +216,8 @@ function Story() {
         <motion.div
           initial={{
             x: "10vw",
-            y: !showViewing || showWriting ? "-80vh" : "-600vh",
-            rotate: !showViewing && showWriting ? 0 : 180,
+            y: "-600vh",
+            rotate: showWriting ? 0 : 180,
           }}
           animate={{
             x: "10vw",
@@ -226,7 +226,7 @@ function Story() {
           }}
           transition={{
             default: { duration: 3 },
-            rotate: { duration: 1, delay: 3.0 },
+            rotate: { duration: 1, delay: 2.8 },
           }}
         >
           <img src="/public/rocket.svg" />

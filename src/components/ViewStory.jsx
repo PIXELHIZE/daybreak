@@ -1,6 +1,7 @@
 import Button from "./Button";
 import { useEffect, useState } from "react";
-import { randomStory, readStory, likeStory } from "../../api/story";
+import Swal from "sweetalert2";
+import { randomStory, readStory, likeStory, hasLiked } from "../../api/story";
 import "./viewStory.css";
 
 export default function ViewStory({ setShowViewing, style }) {
@@ -15,6 +16,10 @@ export default function ViewStory({ setShowViewing, style }) {
         console.log(res);
         setStory(res.content);
         setId(res.id);
+
+        hasLiked(res.id).then((res) => {
+          setLiked(res.liked);
+        });
 
         setTimeout(() => {
           readStory(res.id).then((res) => {
@@ -37,7 +42,9 @@ export default function ViewStory({ setShowViewing, style }) {
   };
 
   useEffect(() => {
-    fetchStory();
+    setTimeout(() => {
+      fetchStory();
+    }, 1000);
   }, []);
 
   return (
@@ -79,8 +86,8 @@ export default function ViewStory({ setShowViewing, style }) {
       <Button
         className="ml-2"
         onClick={() => {
-          likeStory(id);
           setLiked(true);
+          likeStory(id);
         }}
       >
         <i

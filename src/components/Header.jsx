@@ -1,4 +1,3 @@
-// Header.jsx
 import { motion } from "motion/react";
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
@@ -10,7 +9,7 @@ import Swal from "sweetalert2";
 /**
  * @param {boolean} introDone  Story.js에서 전달: 배경 확대(인트로) 끝났는지 여부
  */
-export default function Header({ introDone }) {
+export default function Header({ introDone = true }) {
   /* ✨ 인트로가 끝나기 전에는 DOM 자체를 렌더하지 않음 */
   if (!introDone) return null;
 
@@ -23,6 +22,8 @@ export default function Header({ introDone }) {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [clicked, setClicked] = useState(false);
   const [signupClicked, setSignupClicked] = useState(false);
+
+  const [isLogOrSignup, setIsLogOrSignup] = useState(false);
 
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,7 +40,7 @@ export default function Header({ introDone }) {
         setUser(null);
       })
       .finally(() => setIsLoading(false));
-  }, [location.pathname]);
+  }, [location.pathname, isLogOrSignup]);
 
   /* ─────────────────────────────────────────────────────────── */
   return (
@@ -110,6 +111,9 @@ export default function Header({ introDone }) {
                 setActiveBubble((prev) => (prev === "login" ? null : "login"));
                 setClicked((prev) => !prev);
                 setSignupClicked(false);
+
+                setEmail("");
+                setPassword("");
               }}
             >
               로그인
@@ -153,11 +157,31 @@ export default function Header({ introDone }) {
                           return;
                         }
                         await login({ email, password })
-                          .then(() => {
+                          .then((e) => {
                             console.log("로그인 성공");
+                            setIsLogOrSignup((prev) => !prev);
+                            setActiveBubble(null);
+                            Swal.fire({
+                              toast: true,
+                              position: "top-end",
+                              icon: "success",
+                              title: "로그인 성공!",
+                              showConfirmButton: false,
+                              timer: 3000,
+                              timerProgressBar: true,
+                            });
                           })
                           .catch((error) => {
                             console.error("로그인 실패:", error);
+                            Swal.fire({
+                              toast: true,
+                              position: "top-end",
+                              icon: "error",
+                              title: error.message,
+                              showConfirmButton: false,
+                              timer: 3000,
+                              timerProgressBar: true,
+                            });
                           });
                       }}
                     >
@@ -179,6 +203,9 @@ export default function Header({ introDone }) {
                 );
                 setSignupClicked((prev) => !prev);
                 setClicked(false);
+
+                setEmail("");
+                setPassword("");
               }}
             >
               회원가입
@@ -249,6 +276,7 @@ export default function Header({ introDone }) {
                         await register({ email, password })
                           .then(() => {
                             console.log("회원가입 성공");
+                            setIsLogOrSignup((prev) => !prev);
                           })
                           .catch((error) => {
                             console.error("회원가입 실패:", error);

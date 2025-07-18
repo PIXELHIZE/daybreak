@@ -38,7 +38,7 @@ function Home() {
         }
         return prev + 1;
       });
-    }, 8000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [words.length, navigate]);
@@ -139,7 +139,7 @@ function Home() {
                 textAlign: "center",
                 maxWidth: "100%",
                 lineHeight: 1.4,
-                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)",
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0)",
               }}
             >
               {words[currentIndex]}

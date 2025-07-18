@@ -17,7 +17,7 @@ export default function Button({
           shadow-[inset_0px_4px_4.8px_6px_rgba(0,0,0,0.25)]
         `;
       case "primary":
-        return "bg-white text-black border-none";
+        return `bg-white text-black border-none`;
       case "secondary":
         return "bg-transparent text-white border-2 border-white";
       case "filled":
@@ -32,7 +32,9 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={`${className} px-4 py-2 rounded cursor-pointer ${getBackgroundColor()}`}
+      className={`${className} px-4 py-2 rounded cursor-pointer ${getBackgroundColor()} ${
+        disabled ? "opacity-50" : ""
+      }`}
       style={{ cursor: disabled ? "auto" : "pointer", ...style }}
       disabled={disabled}
     >

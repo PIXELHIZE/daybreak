@@ -44,7 +44,7 @@ export default function Dashboard() {
           storyLikes(story.id).then((likes) => {
             setStoryLikesCount((prev) => ({
               ...prev,
-              [story.id]: likes.length,
+              [story.id]: likes.likes,
             }));
           });
         });
@@ -81,51 +81,53 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="dashboard-container">
-      {memoizedParticles}
-      {user && <Header />}
-      <br />
-      <br />
-      <br />
-      {isLoading ? (
-        <p>로딩중...</p>
-      ) : (
-        <div>
-          <h1 className="dashboard-name">{user.email || "undefined"}</h1>
-          <p className="dashboard-greet">
-            {user.email || "undefined"} 님, 우주 여행은 잘 하고 계신가요?
-          </p>
+    <>
+      {!isLoading && <Header />}
+      <main className="dashboard-container">
+        {memoizedParticles}
+        <br />
+        <br />
+        <br />
+        {isLoading ? (
+          <p>로딩중...</p>
+        ) : (
+          <div>
+            <h1 className="dashboard-name">{user.email || "undefined"}</h1>
+            <p className="dashboard-greet">
+              {user.email || "undefined"} 님, 우주 여행은 잘 하고 계신가요?
+            </p>
 
-          {stories.length > 0 && (
-            <div className="story-slider-container">
-              <Slider {...sliderSettings}>
-                {stories.map((story) => (
-                  <div key={story.id}>
-                    <div className="story-card">
-                      <div className="story-content">
-                        <p className="story-text">{story.content}</p>
-                      </div>
-                      <div className="story-footer">
-                        <button
-                          className="like-btn"
-                          onClick={() => handleLike(story.id)}
-                        >
-                          ♥ {storyLikesCount[story.id] || 0}명의 우주여행자들이
-                          이 별에 공감을 하고 있어요
-                        </button>
+            {stories.length > 0 && (
+              <div className="story-slider-container">
+                <Slider {...sliderSettings}>
+                  {stories.map((story) => (
+                    <div key={story.id}>
+                      <div className="story-card">
+                        <div className="story-content">
+                          <p className="story-text">{story.content}</p>
+                        </div>
+                        <div className="story-footer">
+                          <button
+                            className="like-btn"
+                            onClick={() => handleLike(story.id)}
+                          >
+                            ♥ {storyLikesCount[story.id] || 0}명의
+                            우주여행자들이 이 별에 공감을 하고 있어요
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          )}
+                  ))}
+                </Slider>
+              </div>
+            )}
 
-          <button className="write-btn" onClick={() => navigate("/story")}>
-            글쓰기
-          </button>
-        </div>
-      )}
-    </main>
+            <button className="write-btn" onClick={() => navigate("/story")}>
+              글쓰기
+            </button>
+          </div>
+        )}
+      </main>
+    </>
   );
 }
