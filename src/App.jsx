@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Story from "./pages/Story";
 import HeaderPage from "./components/HeaderPage";
+import Dashboard from "./pages/Dashboard";
 import "./index.css";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="story" element={<Story />} />
           <Route path="header" element={<HeaderPage />} />
+          <Route path="dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
     </BrowserRouter>

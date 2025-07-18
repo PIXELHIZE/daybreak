@@ -4,9 +4,17 @@ export default function Button({
   onClick,
   type = "primary",
   style,
+  className = "",
 }) {
   const getBackgroundColor = () => {
     switch (type) {
+      case "glass":
+        return `
+          bg-white/20 
+          text-white 
+          border-[3px] border-white/30 
+          shadow-[inset_0px_4px_4.8px_6px_rgba(0,0,0,0.25)]
+        `;
       case "primary":
         return "bg-white text-black border-none";
       case "secondary":
@@ -23,7 +31,7 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded cursor-pointer ${getBackgroundColor()}`}
+      className={`${className} px-4 py-2 rounded cursor-pointer ${getBackgroundColor()}`}
       style={style}
     >
       {icon && <span className="mr-2">{icon}</span>}

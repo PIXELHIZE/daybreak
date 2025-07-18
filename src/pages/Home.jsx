@@ -11,17 +11,15 @@ function Home() {
     "안녕하세요, 방문자님?",
     "이곳은 당신의 마음에 쌓인 무거운 짐을 털어낼 수 있는 곳입니다",
     "당신의 사연과 고민은 별이 될 것입니다",
-    "그 별은 여행자가 방문 할 수 있습니다",
-    "당신은 별을 만들 수도 여행자가 될 수도 있습니다",
-    "이제 우주로 떠나 볼까요?",
+    "그 별은 여행자가 방문할 수 있습니다",
+    "당신은 별을 만들 수도, 여행자가 될 수도 있습니다",
+    "이제 우주로 들어가겠습니다",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimationComplete, setIsAnimationComplete] = useState(false);
   const [showSuckAnimation, setShowSuckAnimation] = useState(false);
   const navigate = useNavigate();
 
-  // ParticlesBackground를 메모이제이션하여 재렌더링 방지
   const memoizedParticles = useMemo(() => <ParticlesBackground />, []);
 
   useEffect(() => {
@@ -29,20 +27,18 @@ function Home() {
       setCurrentIndex((prev) => {
         if (prev + 1 >= words.length) {
           clearInterval(interval);
-          setIsAnimationComplete(true);
-          // 2초 대기 후 빨려들어가는 애니메이션 시작
+
           setTimeout(() => {
             setShowSuckAnimation(true);
-            // 빨려들어가는 애니메이션 완료 후 페이지 이동
             setTimeout(() => {
               navigate("/story");
-            }, 1500);
+            }, 4000);
           }, 2000);
           return prev;
         }
         return prev + 1;
       });
-    }, 3000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, [words.length, navigate]);
@@ -60,15 +56,13 @@ function Home() {
         overflow: "hidden",
       }}
     >
-      {/* 파티클 백그라운드도 빨려들어가는 효과 적용 */}
       <motion.div
         initial={{ scale: 1, opacity: 1 }}
         animate={
           showSuckAnimation
             ? {
-                scale: 0,
+                scale: 10,
                 opacity: 0,
-                rotate: 360,
               }
             : {}
         }
@@ -92,9 +86,8 @@ function Home() {
         animate={
           showSuckAnimation
             ? {
-                scale: 0,
+                scale: 15,
                 opacity: 0,
-                rotate: 720,
                 filter: "blur(10px)",
               }
             : {}
@@ -155,7 +148,6 @@ function Home() {
         </AnimatePresence>
       </motion.div>
 
-      {/* 빨려들어가는 효과를 위한 중앙 점 */}
       {showSuckAnimation && (
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
